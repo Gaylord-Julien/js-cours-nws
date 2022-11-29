@@ -12,6 +12,24 @@
   </body>
 
   <script>
-    // TODO: obtenir la valeur du champ de saisie pour verifier si l'accès est autorisé
+    const age = document.getElementById('number1');
+    const submit = document.querySelector('input[type="submit"]');
+    let authorized = false;
+    function isAuthorized(userAge) {
+      return userAge > 18;
+    }
+
+    submit.addEventListener('click', function (event) {
+      event.preventDefault();
+      authorized = isAuthorized(age.value);
+
+      if (authorized) {
+        document.body.innerHTML = 'You are authorized';
+        document.body.style.color = 'green';
+      } else {
+        document.body.innerHTML = 'You are not authorized';
+        document.body.style.color = 'red';
+      }
+    });
   </script>
 </html>
