@@ -14,7 +14,25 @@
       });
 
     coachs.then((data) => {
-      // TODO: afficher les coachs suivi du nombre de coachs total
+      const filter = 'Licence';
+      const coachs = data
+        .map((coach) => {
+          const { attributes } = coach;
+          const { name, degree } = attributes;
+          return { name, degree };
+        })
+        .filter((coach) => coach.degree.includes(filter));
+
+      const ul = document.createElement('ul');
+      coachs.forEach((coach) => {
+        const li = document.createElement('li');
+        li.innerText = `${coach.name} - ${coach.degree}`;
+        ul.appendChild(li);
+      });
+      document.body.appendChild(ul);
+      const p = document.createElement('p');
+      p.innerText = `Nombre de coachs : ${coachs.length}`;
+      document.body.appendChild(p);
     });
   </script>
 </html>
